@@ -14,11 +14,13 @@ public class GameManager {
     private int numOfCollosions = 0;
     private int numberOfLanes = 5;
     private int numberOfRows = 6;
+    private int score = 0;
     private mainCharacter mainCharacter;
     private Set<Obstacle> obstacles;
     private int numberOfObstacles = 0;
     private int maxNumberOfObstacles = 4;
 
+    public boolean lastCollisionByTerrorist = false;
 
     public GameManager() {
 
@@ -87,19 +89,6 @@ public class GameManager {
     }
 
 
-    public Boolean checkCollisionWhenMainCharacterMove(){
-
-        for(Obstacle obstacle : obstacles){
-            if(this.mainCharacter.getPositionX() == obstacle.getPositionX() && this.mainCharacter.getPositionY() == obstacle.getPositionY()){
-                numOfCollosions++;
-                life--;
-                return true;
-            }
-        }
-
-        return false;
-    }
-
 
     public void obstaclesMovement() {
         for (Obstacle obstacle : obstacles) {
@@ -116,14 +105,36 @@ public class GameManager {
 
     public boolean checkCollision() {
         for (Obstacle obstacle : obstacles) {
-            if (this.mainCharacter.getPositionX() == obstacle.getPositionX() && this.mainCharacter.getPositionY() == obstacle.getPositionY()) {
+            if (this.mainCharacter.getPositionX() == obstacle.getPositionX() && this.mainCharacter.getPositionY() == obstacle.getPositionY() && obstacle.isCausesDamage()) {
                 numOfCollosions++;
                 life--;
+                lastCollisionByTerrorist= true;
+                return true;
+            }else if(this.mainCharacter.getPositionX() == obstacle.getPositionX() && this.mainCharacter.getPositionY() == obstacle.getPositionY() && !obstacle.isCausesDamage()){
+                score += 1;
+                lastCollisionByTerrorist= false;
                 return true;
             }
-
         }
         return false;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public GameManager setScore(int score) {
+        this.score = score;
+        return this;
+    }
+
+    public boolean isLastCollisionByTerrorist() {
+        return lastCollisionByTerrorist;
+    }
+
+    public GameManager setLastCollisionByTerrorist(boolean lastCollisionByTerrorist) {
+        this.lastCollisionByTerrorist = lastCollisionByTerrorist;
+        return this;
     }
 }
 

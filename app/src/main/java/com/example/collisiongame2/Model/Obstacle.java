@@ -1,5 +1,6 @@
 package com.example.collisiongame2.Model;
 
+import com.example.collisiongame2.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.Objects;
@@ -7,10 +8,13 @@ import java.util.Random;
 
 public class Obstacle extends Character {
 
-    ShapeableImageView shapeableImageView;
-    public Obstacle(int positionX,ShapeableImageView shapeableImageView ) {
+    private ShapeableImageView shapeableImageView;
+
+    private boolean causesDamage;
+    public Obstacle(int positionX,ShapeableImageView shapeableImageView,boolean causesDamage ) {
         super(positionX, 0);
         this.shapeableImageView = shapeableImageView;
+        this.causesDamage = causesDamage;
     }
 
 
@@ -30,6 +34,12 @@ public class Obstacle extends Character {
     public void setToStartOfRoad(){
         this.setPositionY(0);
         this.setPositionX(getRandomNumber());
+        if(getRandomNumber() == 2){
+             // Set your obstacle image resource here
+            this.causesDamage = false;
+        }else{
+            this.causesDamage = true;
+        }
 
     }
     private int getRandomNumber() {
@@ -46,6 +56,15 @@ public class Obstacle extends Character {
 
     public Obstacle setShapeableImageView(ShapeableImageView shapeableImageView) {
         this.shapeableImageView = shapeableImageView;
+        return this;
+    }
+
+    public boolean isCausesDamage() {
+        return causesDamage;
+    }
+
+    public Obstacle setCausesDamage(boolean causesDamage) {
+        this.causesDamage = causesDamage;
         return this;
     }
 }

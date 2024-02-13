@@ -20,13 +20,14 @@ import com.example.collisiongame2.Logic.GameManager;
 import com.example.collisiongame2.Model.Obstacle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
-
+import com.google.android.material.textview.MaterialTextView;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     private ShapeableImageView main_IMG_character;
     private  ShapeableImageView main_IMG_obstacle;
+    private MaterialTextView main_LBL_score;
     private ShapeableImageView[] main_IMG_hearts;
     private GridLayout MAIN_LAYOUT_GRID;
     private RelativeLayout[][] relativeLayouts;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         MAIN_LAYOUT_GRID = findViewById(R.id.MAIN_LAYOUT_GRID);
         main_button_left = findViewById(R.id.main_button_left);
         main_button_right = findViewById(R.id.main_button_right);
+        main_LBL_score = findViewById(R.id.main_LBL_score);
 
         main_IMG_hearts = new ShapeableImageView[]{
                 findViewById(R.id.main_IMG_heart1),
@@ -110,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
             // Update the lane in the game manager
             gameManager.getMainCharacter().setPositionX(newLane);
             //check if the main character gets into one of the obstacles
-            if(gameManager.checkCollisionWhenMainCharacterMove()){
-                collisionHappendUI();
+            if(gameManager.checkCollision()){
+                collisionHappendUI(gameManager.isLastCollisionByTerrorist());
             }
 
         }
@@ -127,11 +129,11 @@ public class MainActivity extends AppCompatActivity {
             // Update the lane in the game manager
             gameManager.getMainCharacter().setPositionX(newLane);
             //check if the main character gets into one of the obstacles
-            /*
-            if(gameManager.checkCollisionWhenMainCharacterMove()){
-                collisionHappendUI();
+
+            if(gameManager.checkCollision()){
+                collisionHappendUI(gameManager.isLastCollisionByTerrorist());
             }
-*/
+
         }
 
 
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 ObstacleViewMovement(); // Move the obstacle one line below each time
                 handler.postDelayed(this, MAINLOOPTIMING); // Schedule the next iteration
-                int randomDisplay = generateRandomNumber();
+                int randomDisplay = generateRandomNumber(5);
                 if (randomDisplay == 1 && gameManager.getObstacles().size() < gameManager.getMaxNumberOfObstacles()){
                     createNewObstacle();
                 }
@@ -163,14 +165,14 @@ public class MainActivity extends AppCompatActivity {
         //check for collisions
         boolean collision =  gameManager.checkCollision();
         if(collision) {
-            collisionHappendUI();
+            collisionHappendUI(gameManager.isLastCollisionByTerrorist());
         }
     }
 
     public void createNewObstacle(){
         ShapeableImageView obstacleImageView = new ShapeableImageView(this);
         obstacleImageView.setImageResource(R.drawable.terrorist2); // Set your obstacle image resource here
-        Obstacle obstacle = new Obstacle(generateRandomNumber(),obstacleImageView);
+        Obstacle obstacle = new Obstacle(generateRandomNumber(gameManager.getNumberOfLanes()),obstacleImageView, true);
 
         // Set layout parameters as needed
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
@@ -207,11 +209,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void collisionHappendUI(){
+    public void collisionHappendUI(boolean lastCollision){
 
-        refreshHeartImages();
-        vibration();
-        createToast();
+        if(lastCollision == true){
+            refreshHeartImages();
+            vibration();
+            createToast();
+        }else {
+            changeScore();
+        }
         //sound
     }
 
@@ -225,11 +231,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public int generateRandomNumber() {
+    public int generateRandomNumber(int max) {
 
         Random random = new Random();
-        // Generate a random number between 0 and 2
-        int randomNumber = random.nextInt(5);
+        // Generate a random number between 0 and 4
+        int randomNumber = random.nextInt(max);
         return randomNumber;
     }
 
@@ -281,8 +287,20 @@ public class MainActivity extends AppCompatActivity {
         for(Obstacle obstacle : gameManager.getObstacles()){
             int posX = obstacle.getPositionX();
             int posY = obstacle.getPositionY();
+            ShapeableImageView obstacleImageView = obstacle.getShapeableImageView();
+            if(posY == 0 && obstacle.isCausesDamage() == false) {
+                obstacleImageView.setImageResource(R.drawable.cookie);
+            }else if(posY == 0 && obstacle.isCausesDamage() == true){
+                obstacleImageView.setImageResource(R.drawable.terrorist2);
+            }
             relativeLayouts[posY][posX].addView(obstacle.getShapeableImageView());
         }
+
+    }
+
+    public void changeScore(){
+        main_LBL_score.setText(gameManager.getScore() + "");
+        Log.d(TAG, "changeScore: " +gameManager.getScore() + "numberofcollisions:" + gameManager.getNumOfCollosions());
 
     }
 
