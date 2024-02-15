@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background4"
-    tools:context=".MainMenu">
+    tools:context=".Activities.MainMenu">
 
     <GridLayout
         android:id="@+id/MAIN_LAYOUT_GRID"
@@ -124,6 +124,9 @@
             </Button>
 
         </LinearLayout>
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"

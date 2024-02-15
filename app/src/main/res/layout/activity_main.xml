@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background4"
-    tools:context=".MainActivity">
+    tools:context=".Activities.MainActivity">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/main_LBL_score"
@@ -405,7 +405,7 @@
         android:layout_marginLeft="18dp"
         android:layout_marginBottom="2dp"
         android:layout_alignParentBottom="true"
-        tools:context=".MainActivity">
+        tools:context=".Activities.MainActivity">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/main_button_left"
@@ -432,5 +432,78 @@
             android:layout_margin="16dp" />
 
     </RelativeLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/MAIN_GAMEOVER_CARDVIEW"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginHorizontal="50dp"
+        android:padding="10dp"
+        android:layout_centerInParent="true"
+        app:cardBackgroundColor="#a8aaa6"
+
+        app:cardCornerRadius="10dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/main_LBLCARD_GAMEOVER"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:textSize="47sp"
+                android:textStyle="bold"
+                android:text="GAME OVER!"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/MAIN_LBLCARD_FINALSCORE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:text="Final Score:"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/MAIN_EDITTEXT_NAME"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Enter Your Name"
+                android:textSize="25sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerHorizontal="true"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/MAIN_CARDVIEW_BTN_OK"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:textSize="24sp"
+                android:backgroundTint="#b57f51"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
+                android:text="OK"
+                app:cornerRadius="10dp">
+
+            </com.google.android.material.button.MaterialButton>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.cardview.widget.CardView>
+
 
 </RelativeLayout>
