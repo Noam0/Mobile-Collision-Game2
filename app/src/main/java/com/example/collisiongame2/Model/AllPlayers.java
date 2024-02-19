@@ -8,6 +8,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class AllPlayers {
 
@@ -74,6 +76,14 @@ public class AllPlayers {
         return gson.fromJson(playersJson, type);
     }
 
+    public void sortPlayersByScore() {
+        Collections.sort(allPlayersList, new Comparator<Player>() {
+            @Override
+            public int compare(Player player1, Player player2) {
+                return Integer.compare(player2.getScore(), player1.getScore());
+            }
+        });
+    }
 
 
 }

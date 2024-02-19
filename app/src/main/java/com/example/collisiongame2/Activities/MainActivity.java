@@ -3,6 +3,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
+import android.os.Parcelable;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,10 +32,12 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -419,11 +422,14 @@ public class MainActivity extends AppCompatActivity {
         if(MAIN_EDITTEXT_NAME.length() != 0){
             Player newPlayer = new Player().setName(MAIN_EDITTEXT_NAME.getText().toString()).setScore(gameManager.getScore()).setLat(0).setLng(0);
             AllPlayers.getInstance().addPlayer(newPlayer);
-            Log.d(TAG, "allPlayers: " + allPlayers.getInstance().toString());
+            AllPlayers.getInstance().sortPlayersByScore();
 
+            Gson gson = new Gson();
+            String AllPlayers = gson.toJson(allPlayers.getInstance().getAllPlayersList());
             Intent intent = new Intent(this, PlayersBoardActivity.class);
+            intent.putExtra("playerListJson", AllPlayers);
             startActivity(intent);
-            //go to other activity
+
 
         }else {
             createToast("please add your name");
