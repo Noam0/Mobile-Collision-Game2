@@ -1,6 +1,7 @@
 package com.example.collisiongame2.Activities;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Parcelable;
@@ -21,12 +22,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.collisiongame2.Interfaces.CallBack_CharacterMovement;
 import com.example.collisiongame2.Logic.GameManager;
 
 import com.example.collisiongame2.Model.AllPlayers;
 import com.example.collisiongame2.Model.Obstacle;
 import com.example.collisiongame2.Model.Player;
 import com.example.collisiongame2.R;
+import com.example.collisiongame2.Utilities.Sensors;
 import com.example.collisiongame2.Utilities.SharedPreferencesManager;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -69,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
     private final int VIBRATIONTIMING = 300;
 
     private MediaPlayer mp;
+
+    //Sensors:
+    private Sensors sensorsManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,8 +139,26 @@ public class MainActivity extends AppCompatActivity {
             speedOfObjects = FASTMODE;
         }
         if (sensors) {
-
+            initMovementSensors();
+            main_button_right.setVisibility(View.INVISIBLE);
+            main_button_left.setVisibility(View.INVISIBLE);
+            sensorsManager.start();
         }
+    }
+
+    private void initMovementSensors() {
+        sensorsManager = new Sensors(this, new CallBack_CharacterMovement() {
+
+            @Override
+            public void CharacterMoveRight() {
+                moveRight();
+            }
+
+            @Override
+            public void CharacterMoveLeft() {
+                moveLeft();
+            }
+        });
     }
 
 
@@ -325,6 +349,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         isGameRunning = false;
+        if(sensors)
+            sensorsManager.stop();
     }
 
     @Override
@@ -332,6 +358,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if (!isGameRunning) {
             isGameRunning = true;
+            if (sensors)
+                sensorsManager.start();
             startGameLoop();
         }
     }
@@ -373,7 +401,7 @@ public class MainActivity extends AppCompatActivity {
         for (Obstacle obstacle : gameManager.getObstacles()) {
             int posX = obstacle.getPositionX();
             int posY = obstacle.getPositionY();
-            if (gameManager.getMainCharacter().getPositionX() == posX && !obstacle.isCausesDamage()) {
+            if (gameManager.getMainCharacter().getPositionX() == posX && !obstacle.isCausesDamage() && (gameManager.getMainCharacter().getPositionY() == obstacle.getPositionY())) {
                 ShapeableImageView obstacleImageView = obstacle.getShapeableImageView();
                 obstacleImageView.setVisibility(View.INVISIBLE);
                 //relativeLayouts[posY][posX].removeView(obstacle.getShapeableImageView());
@@ -405,6 +433,8 @@ public class MainActivity extends AppCompatActivity {
         main_button_right.setVisibility(View.INVISIBLE);
         showCardOfEndGame(true);
         MAIN_LBLCARD_FINALSCORE.setText("Final Score: " + gameManager.getScore());
+        if(sensors)
+            sensorsManager.stop();
 
     }
 
@@ -429,7 +459,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, PlayersBoardActivity.class);
             intent.putExtra("playerListJson", AllPlayers);
             startActivity(intent);
-
+            finish();
 
         }else {
             createToast("please add your name");

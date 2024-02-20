@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="brown">#241508</color>
   <color name="light_brown">#8D6E63</color>
+    <color name="menu_buttons_color">#3e1d00</color>
+    <color name="menu_buttons_text_color">#fffbf7</color>
+    <color name="menu_buttons_color_clicked">#a56d3b</color>
 </resources>

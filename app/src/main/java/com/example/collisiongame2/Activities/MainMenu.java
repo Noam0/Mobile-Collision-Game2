@@ -1,6 +1,8 @@
 package com.example.collisiongame2.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,13 +16,13 @@ import org.json.JSONObject;
 
 public class MainMenu extends AppCompatActivity {
 
-    private Button MENU_BUTTON_SLOW;
-    private Button MENU_BUTTON_FAST;
+    private AppCompatButton MENU_BUTTON_SLOW;
+    private AppCompatButton MENU_BUTTON_FAST;
 
-    private Button MENU_BUTTON_SENSOR;
+    private AppCompatButton MENU_BUTTON_SENSOR;
 
-    private Button MENU_BUTTON_BUTTONS;
-    private Button MENU_BUTTON_PLAYGAME;
+    private AppCompatButton MENU_BUTTON_BUTTONS;
+    private AppCompatButton MENU_BUTTON_PLAYGAME;
 
     private boolean  sensors;
     private boolean slow;
@@ -52,33 +54,33 @@ public class MainMenu extends AppCompatActivity {
     private void slowButtonClicked() {
         slow = true;
         // Change background color of MENU_BUTTON_SLOW when clicked
-        MENU_BUTTON_SLOW.setBackgroundColor(Color.RED);
+        MENU_BUTTON_SLOW.setBackgroundColor(ContextCompat.getColor(this, R.color.menu_buttons_color_clicked));
         // Reset background color of MENU_BUTTON_FAST
-        MENU_BUTTON_FAST.setBackgroundColor(Color.TRANSPARENT);
+        MENU_BUTTON_FAST.setBackgroundColor(ContextCompat.getColor(this, R.color.menu_buttons_color));
     }
 
     private void fastButtonClicked() {
         slow = false;
         // Change background color of MENU_BUTTON_FAST when clicked
-        MENU_BUTTON_FAST.setBackgroundColor(Color.BLUE);
+        MENU_BUTTON_FAST.setBackgroundColor(ContextCompat.getColor(this, R.color.menu_buttons_color_clicked));
         // Reset background color of MENU_BUTTON_SLOW
-        MENU_BUTTON_SLOW.setBackgroundColor(Color.TRANSPARENT);
+        MENU_BUTTON_SLOW.setBackgroundColor(ContextCompat.getColor(this, R.color.menu_buttons_color));
     }
 
     private void sensorsButtonClicked() {
         sensors = true;
         // Change background color of MENU_BUTTON_SENSOR when clicked
-        MENU_BUTTON_SENSOR.setBackgroundColor(Color.GREEN);
+        MENU_BUTTON_SENSOR.setBackgroundColor(ContextCompat.getColor(this, R.color.menu_buttons_color_clicked));
         // Reset background color of MENU_BUTTON_BUTTONS
-        MENU_BUTTON_BUTTONS.setBackgroundColor(Color.TRANSPARENT);
+        MENU_BUTTON_BUTTONS.setBackgroundColor(ContextCompat.getColor(this, R.color.menu_buttons_color));
     }
 
     private void buttonsButtonClicked() {
         sensors = false;
         // Change background color of MENU_BUTTON_BUTTONS when clicked
-        MENU_BUTTON_BUTTONS.setBackgroundColor(Color.YELLOW);
+        MENU_BUTTON_BUTTONS.setBackgroundColor(ContextCompat.getColor(this, R.color.menu_buttons_color_clicked));
         // Reset background color of MENU_BUTTON_SENSOR
-        MENU_BUTTON_SENSOR.setBackgroundColor(Color.TRANSPARENT);
+        MENU_BUTTON_SENSOR.setBackgroundColor(ContextCompat.getColor(this, R.color.menu_buttons_color));
     }
 
     private void goToGameActivity(){
