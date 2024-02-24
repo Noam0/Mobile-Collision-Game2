@@ -1,36 +1,31 @@
 package com.example.collisiongame2.Activities;
+
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Build;
-import android.os.Parcelable;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.cardview.widget.CardView;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.cardview.widget.CardView;
 
 import com.example.collisiongame2.Interfaces.CallBack_CharacterMovement;
 import com.example.collisiongame2.Logic.GameManager;
-
 import com.example.collisiongame2.Model.AllPlayers;
 import com.example.collisiongame2.Model.Obstacle;
 import com.example.collisiongame2.Model.Player;
 import com.example.collisiongame2.R;
 import com.example.collisiongame2.Utilities.Sensors;
-import com.example.collisiongame2.Utilities.SharedPreferencesManager;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -40,7 +35,6 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -75,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
     //Sensors:
     private Sensors sensorsManager;
+
+    private double lat;
+    private double lon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
 
             sensors = jsonObject.getBoolean("sensors");
             slow = jsonObject.getBoolean("slow");
+            lat = jsonObject.getDouble("lat");
+            lon = jsonObject.getDouble("lon");
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -450,7 +449,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void savePlayerScoreAndGoToPlayersActivity(){
         if(MAIN_EDITTEXT_NAME.length() != 0){
-            Player newPlayer = new Player().setName(MAIN_EDITTEXT_NAME.getText().toString()).setScore(gameManager.getScore()).setLat(0).setLng(0);
+
+
+            Player newPlayer = new Player().setName(MAIN_EDITTEXT_NAME.getText().toString()).setScore(gameManager.getScore()).setLat(lat).setLng(lon);
             AllPlayers.getInstance().addPlayer(newPlayer);
             AllPlayers.getInstance().sortPlayersByScore();
 

@@ -1,18 +1,18 @@
 package com.example.collisiongame2.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
 
-import com.example.collisiongame2.Adapters.PlayerAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.collisiongame2.Interfaces.CallBack_playerScoreClicked;
 import com.example.collisiongame2.Model.Player;
 import com.example.collisiongame2.R;
 import com.example.collisiongame2.Views.ListFragment;
 import com.example.collisiongame2.Views.MapFragment;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
@@ -26,9 +26,6 @@ public class PlayersBoardActivity extends AppCompatActivity {
 
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,17 +34,19 @@ public class PlayersBoardActivity extends AppCompatActivity {
         findViews();
 
         String playerListJson = getIntent().getStringExtra("playerListJson");
-        // Deserialize JSON string to ArrayList<Player>
         Gson gson = new Gson();
         ArrayList<Player> playerList = gson.fromJson(playerListJson, new TypeToken<ArrayList<Player>>(){}.getType());
         Log.d("InFragment", "getDataFromLastActivity: " + playerList.toString());
+
+
 
 
         listFragment = new ListFragment(playerList);
         listFragment.setCallBackPlayerScoreClicked(new CallBack_playerScoreClicked() {
             @Override
             public void playerScoreClicked(double lat, double lon) {
-                mapFragment.zoom(lat,lon);
+                mapFragment.zoom(lat, lon);
+                //FOR EXAMPLE: 33.73151,85.09194
             }
         });
 
@@ -63,15 +62,6 @@ public class PlayersBoardActivity extends AppCompatActivity {
         playerBoard_FRAME_map = findViewById(R.id.playerBoard_FRAME_map);
     }
 
-    private void getDataFromLastActivity(ListFragment listFragment){
 
-        String playerListJson = getIntent().getStringExtra("playerListJson");
-        // Deserialize JSON string to ArrayList<Player>
-        Gson gson = new Gson();
-        ArrayList<Player> playerList = gson.fromJson(playerListJson, new TypeToken<ArrayList<Player>>(){}.getType());
-        Log.d("InFragment", "getDataFromLastActivity: " + playerList.toString());
-
-
-    }
 
 }

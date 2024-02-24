@@ -10,7 +10,7 @@
         android:id="@+id/FRAGMENTLIST_LAYOUT_ROWNAMES"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/brown"
+        android:background="#c36f15"
         android:orientation="horizontal">
 
         <com.google.android.material.textview.MaterialTextView
@@ -20,8 +20,12 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:text="PLACE"
+            android:shadowColor="#80000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="8"
             android:layout_marginStart="8dp"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/white"
             />
@@ -33,9 +37,13 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:text="PLAYER NAME"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/white"
+            android:shadowColor="#80000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="8"
             />
 
         <com.google.android.material.textview.MaterialTextView
@@ -45,9 +53,13 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:text="SCORE"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/white"
+            android:shadowColor="#80000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="8"
             />
 
         <com.google.android.material.textview.MaterialTextView
@@ -57,9 +69,14 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:text="LOCATION"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
+            android:layout_marginStart="4dp"
             android:textColor="@color/white"
+            android:shadowColor="#80000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="8"
             />
 
     </LinearLayout>
@@ -67,7 +84,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_below="@id/FRAGMENTLIST_LAYOUT_ROWNAMES"
-    android:background="#b27745"
+    android:background="@drawable/scoreboardgradient"
     >
 
     <androidx.recyclerview.widget.RecyclerView
@@ -78,32 +95,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="5dp"
 
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- TODO: Update blank fragment layout -->
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/list_LBL_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="fragment #1 "
-        android:layout_centerInParent="true"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:textColor="@color/light_brown"
-        />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/List_BTN_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Send"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/list_LBL_title"
-        />
 
 
 </RelativeLayout>

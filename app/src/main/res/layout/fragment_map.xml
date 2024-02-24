@@ -4,18 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Views.MapFragment"
+    android:orientation="horizontal"
     android:background="#ddadad">
 
-    <!-- TODO: Update blank fragment layout -->
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/map_LBL_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Map"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+<!---
+<com.google.android.material.textview.MaterialTextView
+    android:id="@+id/MAP_TEXT_HEADLINE"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:layout_alignParentTop="true"
+    android:text="Records Location "
+    android:textSize="30sp">
+
+</com.google.android.material.textview.MaterialTextView>
+-->
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/maps"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
 
 
 </RelativeLayout>

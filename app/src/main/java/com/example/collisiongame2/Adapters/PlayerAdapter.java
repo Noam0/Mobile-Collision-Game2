@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.collisiongame2.Interfaces.PlayerCallBack;
 import com.example.collisiongame2.Model.Player;
 import com.example.collisiongame2.R;
-import com.google.android.material.button.MaterialButton;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
 
     private Context context;
     private ArrayList<Player> allPlayersList;
+    private PlayerCallBack playerCallback;
 
     //callback
 
@@ -27,20 +29,22 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
         this.allPlayersList = allPlayersList;
     }
 
-    //setter to callback
-
+    public PlayerAdapter setPlayerCallback(PlayerCallBack playerCallback) {
+        this.playerCallback = playerCallback;
+        return this;
+    }
 
     @NonNull
     @Override
     public PlayerAdapter.PlayerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_row_player_score, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_row_player_score, parent, false);
         return new PlayerViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PlayerAdapter.PlayerViewHolder holder, int position) {
         Player player = getItem(position);
-        holder.player_LBL_rank.setText((String.valueOf(position+1)));
+        holder.player_LBL_rank.setText("#" + (String.valueOf(position + 1)));
         holder.player_LBL_name.setText(player.getName());
         holder.player_LBL_score.setText(String.valueOf(player.getScore()));
 
@@ -52,17 +56,18 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
         return allPlayersList == null ? 0 : allPlayersList.size();
 
     }
-private Player getItem(int position){
+
+    private Player getItem(int position) {
 
         return allPlayersList.get(position);
-}
+    }
 
-    public class PlayerViewHolder extends RecyclerView.ViewHolder{
+    public class PlayerViewHolder extends RecyclerView.ViewHolder {
 
-       private  MaterialTextView player_LBL_rank;
-       private  MaterialTextView player_LBL_name;
-       private MaterialTextView player_LBL_score;
-       private  MaterialButton player_BUTTON_LOCATION;
+        private MaterialTextView player_LBL_rank;
+        private MaterialTextView player_LBL_name;
+        private MaterialTextView player_LBL_score;
+        private ShapeableImageView player_IMG_LOCATION;
 
 
         public PlayerViewHolder(@NonNull View itemView) {
@@ -71,7 +76,15 @@ private Player getItem(int position){
             player_LBL_rank = itemView.findViewById(R.id.player_LBL_rank);
             player_LBL_name = itemView.findViewById(R.id.player_LBL_name);
             player_LBL_score = itemView.findViewById(R.id.player_LBL_score);
-            player_BUTTON_LOCATION = itemView.findViewById(R.id.player_BUTTON_LOCATION);
+            player_IMG_LOCATION = itemView.findViewById(R.id.player_IMG_LOCATION);
+            player_IMG_LOCATION.setOnClickListener(v -> {
+
+                if(playerCallback!=null){
+                    playerCallback.getLatLonFromPlayerClicked(getItem(getAdapterPosition()),getAdapterPosition());
+                }
+
+            });
         }
+
     }
 }

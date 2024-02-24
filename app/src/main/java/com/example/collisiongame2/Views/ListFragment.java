@@ -1,29 +1,26 @@
 package com.example.collisiongame2.Views;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.collisiongame2.Adapters.PlayerAdapter;
 import com.example.collisiongame2.Interfaces.CallBack_playerScoreClicked;
+import com.example.collisiongame2.Interfaces.PlayerCallBack;
 import com.example.collisiongame2.Model.Player;
 import com.example.collisiongame2.R;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
 
 
 public class ListFragment extends Fragment {
-    private MaterialTextView list_LBL_title;
-    private MaterialButton List_BTN_send;
+
 
     private CallBack_playerScoreClicked callBackPlayerScoreClicked;
 
@@ -45,15 +42,16 @@ public class ListFragment extends Fragment {
         findViews(view);
         initViews();
 
-        List_BTN_send.setOnClickListener(v -> playerClicked(32.11, 32.112));
         return view;
     }
 
 
 
     private void playerClicked(double lat, double lon ) {
-        if(callBackPlayerScoreClicked != null)
+        if(callBackPlayerScoreClicked != null) {
+            Log.d("TAG", "playerClicked: IM HERE" + lat + lon);
             callBackPlayerScoreClicked.playerScoreClicked(lat, lon);
+        }
 
     }
     private void initViews() {
@@ -62,10 +60,19 @@ public class ListFragment extends Fragment {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         ListFragment_RCV_PLAYERBOARD.setLayoutManager(linearLayoutManager);
         ListFragment_RCV_PLAYERBOARD.setAdapter(playerAdapter);
+
+        playerAdapter.setPlayerCallback(new PlayerCallBack(){
+            @Override
+            public void getLatLonFromPlayerClicked(Player p, int position) {
+
+                playerClicked(p.getLat(), p.getLng());
+
+            }
+        });
+
+
     }
     private void findViews(View view){
-        list_LBL_title = view.findViewById(R.id.list_LBL_title);
-        List_BTN_send = view.findViewById(R.id.List_BTN_send);
         ListFragment_RCV_PLAYERBOARD = view.findViewById(R.id.ListFragment_RCV_PLAYERBOARD);
     }
 
