@@ -14,7 +14,7 @@
 <p><strong>Screen Shots:</strong></p>
 
 
-<img src="https://github.com/Noam0/Mobile-Collision-Game2/assets/101128914/e65f1a7a-f4f4-419d-96d7-f3a10dbcdca0" alt="pic3" width="300" height="200">
+<img src="https://github.com/Noam0/Mobile-Collision-Game2/assets/101128914/e65f1a7a-f4f4-419d-96d7-f3a10dbcdca0" alt="pic3" width="300" height="500">
 
 
 
