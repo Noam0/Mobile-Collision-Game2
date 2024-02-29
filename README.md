@@ -18,6 +18,7 @@
 <img src="https://github.com/Noam0/Mobile-Collision-Game2/assets/101128914/6b823187-d57a-4867-931d-68017653fd92" alt="pic2" width="270" height="500">
 <img src="https://github.com/Noam0/Mobile-Collision-Game2/assets/101128914/e501979d-0c0c-42eb-8b20-8e98d0a0e84d" alt="pic1" width="270" height="500">
 
+<p></p>
  <p><strong>Project Description</strong></p>
   <p>This Android game is an engaging and interactive application that challenges players to navigate through obstacles, drawing inspiration from real-life heroism. The game features a main character, obstacles, and various interactive elements designed to provide an enjoyable and immersive gaming experience.</p>
 
