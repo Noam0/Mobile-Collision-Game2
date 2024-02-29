@@ -1,4 +1,5 @@
  <h2>Collision Game</h2>
+![icon](https://github.com/Noam0/Mobile-Collision-Game2/assets/101128914/abcd8058-7223-4dc7-a413-6759ce4eac02)
 
   <p><strong>Overview</strong></p>
   <p>Collision Game is a project developed as part of the Mobile Applications course in the Software Engineering degree.
