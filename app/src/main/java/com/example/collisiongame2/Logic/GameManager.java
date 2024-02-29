@@ -111,7 +111,7 @@ public class GameManager {
                 lastCollisionByTerrorist= true;
                 return true;
             }else if(this.mainCharacter.getPositionX() == obstacle.getPositionX() && this.mainCharacter.getPositionY() == obstacle.getPositionY() && !obstacle.isCausesDamage()){
-                score += 1;
+                score += 5;
                 lastCollisionByTerrorist= false;
                 return true;
             }

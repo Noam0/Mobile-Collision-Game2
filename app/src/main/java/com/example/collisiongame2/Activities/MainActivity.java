@@ -66,9 +66,12 @@ public class MainActivity extends AppCompatActivity {
     private final int VIBRATIONTIMING = 300;
 
     private MediaPlayer mp;
-
+    private MediaPlayer mpMoveRight;
+    private MediaPlayer mpMoveLeft;
+    private MediaPlayer mpCollisionSound;
     //Sensors:
     private Sensors sensorsManager;
+    private int timeCounter = 0;
 
     private double lat;
     private double lon;
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         main_button_right.setOnClickListener(view -> moveRight());
         MAIN_CARDVIEW_BTN_OK.setOnClickListener(view -> savePlayerScoreAndGoToPlayersActivity());
         gameManager = new GameManager();
+        createSounds();
         AllPlayers allPlayers = AllPlayers.getInstance();
         startGameLoop();
 
@@ -194,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
             // Update the lane in the game manager
             gameManager.getMainCharacter().setPositionX(newLane);
             //check if the main character gets into one of the obstacles
+            mpMoveRight.start();
             if (gameManager.checkCollision()) {
                 collisionHappendUI(gameManager.isLastCollisionByTerrorist());
             }
@@ -212,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
             // Update the lane in the game manager
             gameManager.getMainCharacter().setPositionX(newLane);
             //check if the main character gets into one of the obstacles
-
+            mpMoveLeft.start();
             if (gameManager.checkCollision()) {
                 collisionHappendUI(gameManager.isLastCollisionByTerrorist());
             }
@@ -230,6 +235,10 @@ public class MainActivity extends AppCompatActivity {
                 if (!isGameRunning) {
                     return; // Stop the loop if the game is not running
                 }
+
+
+                timeCounter++;
+                odometer();
                 ObstacleViewMovement(); // Move the obstacle one line below each time
                 handler.postDelayed(this, speedOfObjects); // Schedule the next iteration
                 int randomDisplay = generateRandomNumber(5);
@@ -292,9 +301,11 @@ public class MainActivity extends AppCompatActivity {
     public void collisionHappendUI(boolean lastCollision) {
 
         if (lastCollision == true) {
+            mpCollisionSound.start();
             refreshHeartImages();
             vibration();
             createToast("oops");
+
         } else {
             changeScore();
             removeCookie();
@@ -391,8 +402,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeScore() {
+
         main_LBL_score.setText(gameManager.getScore() + "");
-        Log.d(TAG, "changeScore: " + gameManager.getScore() + "numberofcollisions:" + gameManager.getNumOfCollosions());
+
+    }
+
+    private void odometer(){
+        if(timeCounter % 5 == 0){
+            gameManager.setScore(gameManager.getScore()+1);
+            changeScore();
+        }
 
     }
 
@@ -468,6 +487,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    private void createSounds(){
+        mpMoveRight = MediaPlayer.create(MainActivity.this, R.raw.movementright);
+        mpMoveLeft = MediaPlayer.create(MainActivity.this, R.raw.movementleft);
+        mpCollisionSound = MediaPlayer.create(MainActivity.this, R.raw.punch);
+    }
 
 
 }

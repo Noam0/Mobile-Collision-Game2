@@ -425,11 +425,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+
+            android:layout_marginBottom="16dp"
             android:contentDescription="right Floating Button"
             android:src="@drawable/baseline_arrow_forward_24"
-            app:backgroundTint="#ce925d"
-
-            android:layout_margin="16dp" />
+            app:backgroundTint="#ce925d" />
 
     </RelativeLayout>
 
