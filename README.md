@@ -22,13 +22,16 @@
   <p>This Android game is an engaging and interactive application that challenges players to navigate through obstacles, drawing inspiration from real-life heroism. The game features a main character, obstacles, and various interactive elements designed to provide an enjoyable and immersive gaming experience.</p>
 
   <p><strong>Features</strong></p>
-  <ul>
-    <li><strong>Character Movement:</strong> Navigate the main character through different lanes to avoid obstacles.</li>
-    <li><strong>Obstacle Creation:</strong> Dynamically generate obstacles at random intervals to challenge the player.</li>
-    <li><strong>Collision Detection:</strong> Implement collision detection logic to enhance gameplay and add difficulty.</li>
-    <li><strong>Life Management:</strong> Track the player's life count and handle collisions accordingly.</li>
-    <li><strong>Vibration and Feedback:</strong> Provide haptic feedback through device vibration upon collisions for a more immersive experience.</li>
-    <li><strong>Toast Notifications:</strong> Display toast notifications to inform the player about events within the game.</li>
-  </ul>
+<ul>
+  <li><strong>Character Movement:</strong> Guide the main character through various obstacles by utilizing motion-controlled navigation, leveraging the sensors of the player's device for an intuitive gaming experience.</li>
+  <li><strong>Obstacle Creation:</strong> Dynamically generate obstacles at random intervals to challenge the player's agility and reflexes, offering a dynamic and engaging gameplay environment.</li>
+  <li><strong>Collision Detection:</strong> Implement sophisticated collision detection logic to accurately detect and respond to collisions between the main character and obstacles, enhancing gameplay realism and challenge.</li>
+  <li><strong>Life Management:</strong> Utilize a robust life management system to track the player's life count, enabling precise handling of collisions and providing strategic depth to the gaming experience.</li>
+  <li><strong>Vibration and Feedback:</strong> Enhance immersion through haptic feedback, utilizing device vibration to simulate collisions and provide tactile feedback to the player, further immersing them in the gaming world.</li>
+  <li><strong>Toast Notifications:</strong> Implement informative toast notifications to alert players about significant in-game events, such as achieving high scores, unlocking achievements, or receiving rewards, ensuring players are engaged and informed throughout their gameplay.</li>
+  <li><strong>Scoreboard with Shared Preferences:</strong> Integrate a scoreboard functionality using Shared Preferences to locally store and display player scores, fostering competition and encouraging players to strive for higher achievements.</li>
+  <li><strong>Motion-Controlled Character Movement:</strong> Enable motion-controlled movement of the main character by utilizing the sensors of the player's device, allowing players to tilt their phones right and left to maneuver through obstacles with ease and precision.</li>
+  <li><strong>Geolocation Tracking with Google API:</strong> Implement Google API to track and showcase the geographical locations where players have engaged with the game within the scoreboard, promoting community engagement and enabling players to visualize their gaming footprint.</li>
+</ul>
 
 </body>
