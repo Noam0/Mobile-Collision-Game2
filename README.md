@@ -12,9 +12,9 @@
 
 
 <p><strong>Screen Shots:</strong></p>
-![pic1](https://github.com/Noam0/Mobile-Collision-Game2/assets/101128914/b6c3342e-3d4b-4c22-b9b7-408493e525a5)
-![pic3](https://github.com/Noam0/Mobile-Collision-Game2/assets/101128914/b4ac33aa-e0ed-43d2-867f-4766fcffa859)
-![pic2](https://github.com/Noam0/Mobile-Collision-Game2/assets/101128914/a63d4995-a4f5-41d0-bd21-cedeb26d7328)
+
+
+![pic3](https://github.com/Noam0/Mobile-Collision-Game2/assets/101128914/e65f1a7a-f4f4-419d-96d7-f3a10dbcdca0)
 
 
 
