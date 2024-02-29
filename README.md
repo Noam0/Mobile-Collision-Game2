@@ -6,9 +6,9 @@
   
 <p>-All objects were created and designed using Photoshop and the Notability app by me</p>
 
-<p><strong>Video Explanation About The Code:</strong></p>
+<p><strong>App Presentation Video:</strong></p>
 
-https://www.youtube.com/watch?v=LaSOk0cuXRY
+[https://www.youtube.com/watch?v=LaSOk0cuXRY](https://www.youtube.com/watch?v=XVkNMuID84Y)
 
 
 <p><strong>Screen Shots:</strong></p>
