@@ -35,6 +35,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -304,6 +305,7 @@ public class MainActivity extends AppCompatActivity {
             mpCollisionSound.start();
             refreshHeartImages();
             vibration();
+            this.timeCounter = 1;
             createToast("oops");
 
         } else {
@@ -474,12 +476,14 @@ public class MainActivity extends AppCompatActivity {
             AllPlayers.getInstance().addPlayer(newPlayer);
             AllPlayers.getInstance().sortPlayersByScore();
 
+            List<Player> topPlayers = AllPlayers.getInstance().getAllPlayersList().subList(0, Math.min(10, AllPlayers.getInstance().getAllPlayersList().size()));
             Gson gson = new Gson();
-            String AllPlayers = gson.toJson(allPlayers.getInstance().getAllPlayersList());
+            String topPlayersJson = gson.toJson(topPlayers);
             Intent intent = new Intent(this, PlayersBoardActivity.class);
-            intent.putExtra("playerListJson", AllPlayers);
+            intent.putExtra("playerListJson", topPlayersJson);
             startActivity(intent);
             finish();
+
 
         }else {
             createToast("please add your name");

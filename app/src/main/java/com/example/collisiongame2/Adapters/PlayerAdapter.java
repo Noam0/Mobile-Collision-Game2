@@ -43,11 +43,10 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
 
     @Override
     public void onBindViewHolder(@NonNull PlayerAdapter.PlayerViewHolder holder, int position) {
-        Player player = getItem(position);
-        holder.player_LBL_rank.setText("#" + (String.valueOf(position + 1)));
-        holder.player_LBL_name.setText(player.getName());
-        holder.player_LBL_score.setText(String.valueOf(player.getScore()));
-
+            Player player = getItem(position);
+            holder.player_LBL_rank.setText("#" + (String.valueOf(position + 1)));
+            holder.player_LBL_name.setText(player.getName());
+            holder.player_LBL_score.setText(String.valueOf(player.getScore()));
 
     }
 

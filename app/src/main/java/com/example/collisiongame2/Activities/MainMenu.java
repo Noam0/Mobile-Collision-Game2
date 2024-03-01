@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -159,10 +160,13 @@ public class MainMenu extends AppCompatActivity {
         AllPlayers.getInstance().sortPlayersByScore();
         allPlayers = AllPlayers.getInstance().getAllPlayersList();
 
+        // Get the first 10 players after sorting
+        List<Player> topPlayers = allPlayers.subList(0, Math.min(10, allPlayers.size()));
+
         Gson gson = new Gson();
-        String AllPlayers = gson.toJson(allPlayers);
+        String topPlayersJson = gson.toJson(topPlayers);
         Intent intent = new Intent(this, PlayersBoardActivity.class);
-        intent.putExtra("playerListJson", AllPlayers);
+        intent.putExtra("playerListJson", topPlayersJson);
         startActivity(intent);
 
     }
